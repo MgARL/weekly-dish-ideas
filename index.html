@@ -10,40 +10,65 @@
 </head>
 <body>
     <main class="container">
-        <h1>List of dishes for th Week</h1>
-    </main>
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <h1 class="text-center">List of dishes for the Week</h1>
+            </div>
+        </div>
+    <div class="row pb-3">
+        <div class="col-sm-12 d-flex justify-content-center">
+            <button type="submit" id="createList" class="btn btn-outline-dark">Get List</button>
+        </div>
+    </div>
     <table class="table table-striped table-dark">
         <thead>
             <tr>
-                <th scope="col">Days of Week</th>
+                <th scope="col">Day of the Week</th>
                 <th scope="col">Dish Name</th>
-                <th scope="col">Ingridients</th>
+                <th scope="col">Ingredients</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td scope="row">Monday</td>
-                <td>Jalapenos Poppers</td>
-                <td>
-                    <ul>
-                        <li>Jalapenos</li>
-                        <li>Cream Cheese</li>
-                        <li>Bacon</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td scope="row">Monday</td>
-                <td>Jalapenos Poppers</td>
-                <td>
-                    <ul>
-                        <li>Jalapenos</li>
-                        <li>Cream Cheese</li>
-                        <li>Bacon</li>
-                    </ul>
-                </td>
-            </tr>
+        <tbody id="tableBody">
+            
         </tbody>
     </table>
+
+    <div class="row py-3">
+        <div class="col-sm-6 d-flex justify-content-center">
+            <span class="input-group-text">Add New Dish:</span>
+            <input class="form-control" type="text" placeholder="add new dish here">
+        </div>
+        <div class="col-sm-1">
+            <button class="btn btn-outline-dark" type="submit">submit</button>
+        </div>
+    </div>
+</main>      
+
+    <script src="/script.js"></script>
 </body>
 </html>
+
+<!-- this is an example of  the contents of the table  
+            <tr>
+                <td scope="row">Monday</td>
+                <td>Jalapenos Poppers</td>
+                <td>
+                    <ul>
+                        <li>Jalapenos</li>
+                        <li>Cream Cheese</li>
+                        <li>Bacon</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td scope="row">Monday</td>
+                <td>Jalapenos Poppers</td>
+                <td>
+                    <ul>
+                        <li>Jalapenos</li>
+                        <li>Cream Cheese</li>
+                        <li>Bacon</li>
+                    </ul>
+                </td>
+            </tr>
+-->
