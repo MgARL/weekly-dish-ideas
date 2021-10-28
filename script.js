@@ -69,24 +69,25 @@ document.querySelector('#addingToList').addEventListener('click', (e) => {
    // Creating 2 vars to hold the 2 text areas values
 let addDish = document.querySelector('#addDish').value;
 document.querySelector('#addDish').value = '';
-
 let addIngredients = document.querySelector('#addIngredients').value;
 document.querySelector('#addIngredients').value = '';
-//creating new Ob with new values
- let newDish = {
-     dishName: addDish,
-     ingredients: addIngredients
- }
- 
- console.log(dishesList);
 
- //adding newDish Ob to Aray DishesList
+if (addDish !== '' && addIngredients !== '' && addDish !== ' ' && addIngredients !== ' '){
+    //creating new Ob with new values
 
- dishesList.push(newDish);
+    let newDish = {
+         dishName: addDish,
+        ingredients: addIngredients
+        }
 
+    //adding newDish Ob to Aray DishesList
 
+    dishesList.push(newDish);
 
-console.log(dishesList); 
+    //Making The updated Array Persisitn by adding it to local Storage.
+
+    localStorage.setItem('dishesList', JSON.stringify(dishesList));
+    }
 
 })
 
