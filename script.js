@@ -61,6 +61,36 @@ document.querySelector('#createList').addEventListener('click', (e) => {
         tableBody.innerHTML += `<tr><td>${daysOfWeek[i]}</td><td>${dishesForWeek[i].dishName}</td><td>${dishesForWeek[i].ingredients}</td></tr>`
     }
 })
+// Adding New Object of Dish to the dishesList Array
+
+// Creating the event that will create the new dish by clicking sbumit button 
+
+document.querySelector('#addingToList').addEventListener('click', (e) => {
+   // Creating 2 vars to hold the 2 text areas values
+let addDish = document.querySelector('#addDish').value;
+document.querySelector('#addDish').value = '';
+
+let addIngredients = document.querySelector('#addIngredients').value;
+document.querySelector('#addIngredients').value = '';
+//creating new Ob with new values
+ let newDish = {
+     dishName: addDish,
+     ingredients: addIngredients
+ }
+ 
+ console.log(dishesList);
+
+ //adding newDish Ob to Aray DishesList
+
+ dishesList.push(newDish);
+
+
+
+console.log(dishesList); 
+
+})
+
+
 
 
 // // Shuffle array
