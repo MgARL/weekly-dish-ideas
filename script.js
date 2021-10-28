@@ -2,42 +2,41 @@
 let dishesList = [
     {
         dishName: "Jalapenos Poppers",
-        ingredients: [' Jalapenos', ' Cream Cheese', ' Bacon']
+        ingredients: 'Jalapenos, Cream Cheese, Bacon'
     },
     {
         dishName: 'Chicken & Cheese-Broccoli',
-        ingredients: [' Chicken Tenders', ' Broccolli', ' Heavy Cream', ' Bacon', ' Mozzarella Cheese']
+        ingredients: 'Chicken Tenders, Broccolli, Heavy Cream, Bacon, Shreded Mozzarella Cheese'
     },
     {
         dishName: 'Salad With Choice of Meat(Chiken/Beef',
-        ingredients: [' Lettuce Mix', ' Canned Corn', ' Dressing(Ranch/Alfredo)', " Choice of Meat(Chicken/Beef)"]
+        ingredients: ' Lettuce Mix, Canned Corn, Dressing(Ranch/Alfredo), Choice of Meat(Chicken/Beef)'
     },
     {
         dishName: 'Steak & Greenbeans/Asparragus',
-        ingredients: [' Steak',' Green-bean/Asparragus',' Butter', ' Coice of Sauce(bbq, steak etc.)']
+        ingredients: 'Steak, Green-bean/Asparragus, Butter, Coice of Sauce(bbq, steak etc.)'
     },
     {
         dishName: 'Meatballs with Cauliflower Rice',
-        ingredients: [' Ground Beef',' Your Choice of Sesoning',' Riced Cauliflower',' Almond flour', ' Eggs']
+        ingredients: 'Ground Beef, Your Choice of Sesoning, Riced Cauliflower, Almond flour, Eggs'
     },{
         dishName: 'Salmon',
-        ingredients: [' Atlantic Herb Salmon',' Butter']
+        ingredients: 'Atlantic Herb Salmon Butter'
     },{
         dishName: 'Chicken Wings Airfried',
-        ingredients: [' Chicken Wings raw',' Choice of Seasoning(bbq,lemon peppert etc.)',' Choice of Sauce(bbq, Honey Mustard etc.']
+        ingredients: 'Chicken Wings raw Choice of Seasoning(bbq,lemon peppert etc.), Choice of Sauce(bbq, Honey Mustard etc.'
     },{
         dishName: 'Pork Ribs Airfried',
-        ingredients: [' Short Ribs raw', ' BBQ Seasoning', ' BBQ Sauce']
+        ingredients: 'Short Ribs raw, BBQ Seasoning, BBQ Sauce'
     }
-];
+]
 
 let listFromLocal = JSON.parse(localStorage.getItem('dishesList'));
 
-if (listFromLocal === null){
-  console.log(listFromLocal)
-} else{
+if (listFromLocal !== null){
     dishesList = listFromLocal;
-}
+    console.log(dishesList)
+};
 
 // Now and Array of the days of the weeek
 
