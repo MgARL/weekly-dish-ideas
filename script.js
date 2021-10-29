@@ -88,7 +88,6 @@ if (addDish !== '' && addIngredients !== '' && addDish !== ' ' && addIngredients
 
     localStorage.setItem('dishesList', JSON.stringify(dishesList));
     }
-
 })
 
 
