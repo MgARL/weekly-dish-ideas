@@ -35,7 +35,7 @@ let listFromLocal = JSON.parse(localStorage.getItem('dishesList'));
 
 if (listFromLocal !== null) {
     dishesList = listFromLocal;
-    console.log(dishesList)
+    console.log('List Loaded from local Storage into memory')
 };
 
 // Array of the days of the weeek
@@ -60,6 +60,7 @@ document.querySelector('#createList').addEventListener('click', (e) => {
         // now lets update the tables in the HTML Documnet
         tableBody.innerHTML += `<tr scope="row"><td>${daysOfWeek[i]}</td><td>${dishesForWeek[i].dishName}</td><td>${dishesForWeek[i].ingredients}</td></tr>`
     }
+    console.log('List for the Week created!')
 })
 //slecting proper table body to work on. The full list table
 let fullTableBody = document.querySelector('#fullTableBody');
@@ -70,10 +71,10 @@ window.addEventListener('load', fullList())
 function fullList () {
     // for loop to iterate thru the full list array
     for (i = 0; i < dishesList.length; i++) {
-        fullTableBody.innerHTML += `<tr scope="row"><td>${dishesList[i].dishName}</td><td>${dishesList[i].ingredients}</td><td><button class="btn btn-outline-danger">Remove</button></td></tr>`
+        fullTableBody.innerHTML += `<tr scope="row"><td>${dishesList[i].dishName}</td><td>${dishesList[i].ingredients}</td><td><button class="btn btn-outline-danger btn-sm">Remove</button></td></tr>`
     }
 
-    console.log(fullTableBody)
+    console.log('Full list showing')
 }
 
 // Adding New Object of Dish to the dishesList Array
@@ -98,6 +99,9 @@ document.querySelector('#addingToList').addEventListener('click', (e) => {
         //adding newDish Ob to Aray DishesList
 
         dishesList.push(newDish);
+        
+        //refreshing the full list in accordeon, so new item shows
+        fullList();
 
         //Making The updated Array Persisitn by adding it to local Storage.
 
