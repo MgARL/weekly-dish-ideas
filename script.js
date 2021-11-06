@@ -101,8 +101,7 @@ for( let i = 0; i < allRemoveBtns.length; i++){
         if ( dishesList.length > 5){
             if (i > -1){
                 dishesList.splice(i, 1)
-                fullList();
-    
+                //removed full list function redundant with refresh page
                 saveToLocal();
     
                 location.reload(); //Added this because of a bug that after first item removed no more items could be removed.
