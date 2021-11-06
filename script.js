@@ -69,8 +69,9 @@ window.addEventListener('load', fullList())
 
 //Function to create list in Accordeon
 function fullList () {
+    fullTableBody.innerHTML += '';
     // for loop to iterate thru the full list array
-    for (i = 0; i < dishesList.length; i++) {
+    for (let i = 0; i < dishesList.length; i++) {
         fullTableBody.innerHTML += `<tr scope="row"><td>${dishesList[i].dishName}</td><td>${dishesList[i].ingredients}</td><td><button class="btn btn-outline-danger btn-sm" id="remove-btn">Remove</button></td></tr>`
     }
 
@@ -122,15 +123,17 @@ document.querySelector('#addingToList').addEventListener('click', (e) => {
 let allRemoveBtns = document.querySelectorAll("#remove-btn");
 
 // for loop to iterate thru buttons
-//create a variable to keep track of Index Number
 
-let indexNumber = 0;
+for( let i = 0; i < allRemoveBtns.length; i++){
+     //To get the actual Index number from the i variable make sure you actually declare it in the for loop parenthesis, for some reason if you do not express the let, it will give you the as I the next number of you Array length, example if it is 5 length i will be 6. 
 
-for(i = 0; i < allRemoveBtns.length; i++){
-    
     allRemoveBtns[i].addEventListener('click', function (e){
-        indexNumber = i;
-        console.log(indexNumber)
+        console.log(i);
+        if (i > -1){
+            dishesList.splice(i, 1)
+            fullList()
+        }
+        saveToLocal();
     });
 }
 
