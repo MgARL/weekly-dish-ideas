@@ -67,14 +67,21 @@ let fullTableBody = document.querySelector('#fullTableBody');
 // Creating Event to show Full list of items in Array
 window.addEventListener('load', fullList())
 
-
+//Function to create list in Accordeon
 function fullList () {
     // for loop to iterate thru the full list array
     for (i = 0; i < dishesList.length; i++) {
-        fullTableBody.innerHTML += `<tr scope="row"><td>${dishesList[i].dishName}</td><td>${dishesList[i].ingredients}</td><td><button class="btn btn-outline-danger btn-sm">Remove</button></td></tr>`
+        fullTableBody.innerHTML += `<tr scope="row"><td>${dishesList[i].dishName}</td><td>${dishesList[i].ingredients}</td><td><button class="btn btn-outline-danger btn-sm" id="remove-btn">Remove</button></td></tr>`
     }
 
     console.log('Full list showing')
+}
+
+
+ //Making a fucntion to save the Updated Array in Local.
+function saveToLocal () {
+     localStorage.setItem('dishesList', JSON.stringify(dishesList));
+
 }
 
 // Adding New Object of Dish to the dishesList Array
@@ -103,11 +110,29 @@ document.querySelector('#addingToList').addEventListener('click', (e) => {
         //refreshing the full list in accordeon, so new item shows
         fullList();
 
-        //Making The updated Array Persisitn by adding it to local Storage.
-
-        localStorage.setItem('dishesList', JSON.stringify(dishesList));
+        // callling save to storage function
+        saveToLocal();
     }
 })
+
+// Creating Remove Functionality
+
+// Array of all remove buttons on full list
+
+let allRemoveBtns = document.querySelectorAll("#remove-btn");
+
+// for loop to iterate thru buttons
+//create a variable to keep track of Index Number
+
+let indexNumber = 0;
+
+for(i = 0; i < allRemoveBtns.length; i++){
+    
+    allRemoveBtns[i].addEventListener('click', function (e){
+        indexNumber = i;
+        console.log(indexNumber)
+    });
+}
 
 
 
@@ -117,4 +142,3 @@ document.querySelector('#addingToList').addEventListener('click', (e) => {
 
 // // Get sub-array of first n elements after shuffled
 // let selected = shuffled.slice(0, n);
-// aa
