@@ -64,12 +64,10 @@ document.querySelector('#createList').addEventListener('click', (e) => {
 })
 //slecting proper table body to work on. The full list table
 let fullTableBody = document.querySelector('#fullTableBody');
-// Creating Event to show Full list of items in Array
-window.addEventListener('load', fullList())
 
 //Function to create list in Accordeon
 function fullList () {
-    fullTableBody.innerHTML += '';
+    fullTableBody.innerHTML = '';
     // for loop to iterate thru the full list array
     for (let i = 0; i < dishesList.length; i++) {
         fullTableBody.innerHTML += `<tr scope="row"><td>${dishesList[i].dishName}</td><td>${dishesList[i].ingredients}</td><td><button class="btn btn-outline-danger btn-sm" id="remove-btn">Remove</button></td></tr>`
@@ -78,12 +76,43 @@ function fullList () {
     console.log('Full list showing')
 }
 
+// Showing Full list of items in Array
+fullList();
 
  //Making a fucntion to save the Updated Array in Local.
 function saveToLocal () {
      localStorage.setItem('dishesList', JSON.stringify(dishesList));
 
 }
+
+// Creating Remove Functionality
+
+// Array of all remove buttons on full list
+
+let allRemoveBtns = document.querySelectorAll("#remove-btn");
+
+// for loop to iterate thru buttons
+
+for( let i = 0; i < allRemoveBtns.length; i++){
+     //To get the actual Index number from the i variable make sure you actually declare it in the for loop parenthesis, for some reason if you do not express the let, it will give you the as I the next number of you Array length, example if it is 5 length i will be 6. 
+
+    allRemoveBtns[i].addEventListener('click', function (e){
+        console.log(i);
+        if ( dishesList.length > 5){
+            if (i > -1){
+                dishesList.splice(i, 1)
+                fullList();
+    
+                saveToLocal();
+    
+                location.reload(); //Added this because of a bug that after first item removed no more items could be removed.
+            }
+        } else {
+            console.log('You need more than 5 items to create a List!')
+        }
+    });
+}
+
 
 // Adding New Object of Dish to the dishesList Array
 
@@ -116,26 +145,6 @@ document.querySelector('#addingToList').addEventListener('click', (e) => {
     }
 })
 
-// Creating Remove Functionality
-
-// Array of all remove buttons on full list
-
-let allRemoveBtns = document.querySelectorAll("#remove-btn");
-
-// for loop to iterate thru buttons
-
-for( let i = 0; i < allRemoveBtns.length; i++){
-     //To get the actual Index number from the i variable make sure you actually declare it in the for loop parenthesis, for some reason if you do not express the let, it will give you the as I the next number of you Array length, example if it is 5 length i will be 6. 
-
-    allRemoveBtns[i].addEventListener('click', function (e){
-        console.log(i);
-        if (i > -1){
-            dishesList.splice(i, 1)
-            fullList()
-        }
-        saveToLocal();
-    });
-}
 
 
 
