@@ -158,7 +158,7 @@ document.querySelector('#addingToList').addEventListener('click', (e) => {
             ingredients: addIngredients
         }
 
-        //adding newDish Ob to Aray DishesList
+        //adding newDish Ob to Array DishesList
 
         dishesList.push(newDish);
         
