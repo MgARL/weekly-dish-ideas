@@ -82,7 +82,19 @@ function fullList () {
 // Showing Full list of items in Array
 fullList();
 
- //Making a fucntion to save the Updated Array in Local.
+// Reset Button to rest full list to original List
+
+document.querySelector('#reset').addEventListener('click', function(){
+
+    if (confirm("All of your custom Dishes will be lost, are you sure you want to reset?")) {
+        localStorage.removeItem('dishesList');
+
+        location.reload()
+
+      }
+})
+
+ //Making a function to save the Updated Array in Local.
 function saveToLocal () {
      localStorage.setItem('dishesList', JSON.stringify(dishesList));
 
@@ -111,6 +123,17 @@ for( let i = 0; i < allRemoveBtns.length; i++){
             }
         } else {
             console.log('You need more than 5 items to create a List!')
+
+            let accordionBody = document.querySelector('.accordion-body')
+            let childNode = document.querySelector('#accordion-child')
+            let warningDiv = document.createElement('div');
+            warningDiv.innerHTML = "You need more than 5 items to create a List"
+            warningDiv.setAttribute('class','bg-dark text-center text-danger mb-2 fs-5')
+            warningDiv.setAttribute('id', 'warning-div')
+            accordionBody.insertBefore(warningDiv, childNode);
+            // removing this alert after  2 seconds
+
+            setTimeout( ()=> document.querySelector('#warning-div').remove(), 2000)
         }
     });
 }
