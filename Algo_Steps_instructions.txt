@@ -1,0 +1,22 @@
+Create an Array with five days of week.
+1 - get new array of 5 random items from original item list. 
+
+2.- create for loop 
+
+3. Create TR element, 
+
+4- create 3 TD elemts(day, name, and ingredients). 
+
+5. TD text content set to for day of week with index no.
+6- TD text Content set to Array[i].name
+6.5 .- create a V to hold ingredients Array.
+7.- For the last TD I will need another for loop. 
+8.-  inside the loop create and Li element for each item.  Then append them to the last TD. 
+
+Remove Functionality 
+
+1. Create Array of Remove btns
+2.- Creat for loop witj RemBtnsA.lenght
+3. Inside Loop Create click  event listeners for A index.
+4.- inside the event function, splice the full list Array.
+5.-  call the refresh function for full list.
