@@ -48,6 +48,8 @@ const btnLogin = document.querySelector('#login');
 const inputEmail = document.querySelector('#email'); 
 const inputPassword = document.querySelector('#password');
 const btnLogout = document.createElement('button');
+const btnLoginModal = document.querySelector('#login-modal-btn');
+const loginModalCon = document.querySelector('#modal-container');
 
 const loginEmailPassword = async (e) => {
     e.preventDefault()
@@ -72,7 +74,7 @@ const loginEmailPassword = async (e) => {
 
 
 } 
-
+btnLoginModal.addEventListener('click', showLoginModal)
 btnLogin.addEventListener('click', loginEmailPassword);
 btnLogout.addEventListener('click', loggingOut);
 
@@ -95,13 +97,10 @@ document.querySelector('#createList').addEventListener('click', (e) => {
 
     //for loop to iterate thru this new 5 dishes Array
     for (let i = 0; i < dishesForWeek.length; i++) {
-        // console.log(daysOfWeek[i], dishesForWeek[i].dishName)
         // now lets update the tables in the HTML Document
         tableBody.innerHTML += `<tr scope="row"><td>${daysOfWeek[i]}</td><td>${dishesForWeek[i].dishName}</td><td>${dishesForWeek[i].ingredients}</td></tr>`
     }
     table.appendChild(tableBody);
-
-    console.log('List for the Week created!')
 })
 
 //removing Accordion on loading
@@ -117,11 +116,14 @@ function showFullList(){
     body.insertBefore(fullListAcc, footer);
     document.querySelector('#addingToList').addEventListener('click', addingToList);   
 }
+// show login Modal
+function showLoginModal(){
+    loginModalCon.classList.remove('d-none');
+}
 
 // Logged In UI Function
 function loggedInUI(){
     // Replacing Login button for Log Out btn
-    let btnLoginModal = document.querySelector('#login-modal-btn');
     let loginDiv = document.querySelector('#login-div');
     
     btnLogout.textContent = 'Log Out';
@@ -132,6 +134,7 @@ function loggedInUI(){
     loginDiv.insertBefore(btnLogout, btnLoginModal);
 
     btnLoginModal.remove()
+    loginModalCon.classList.add('d-none');
 }
 
 // logging Out Function
@@ -145,16 +148,12 @@ function fullList () {
     // showing FullList
     showFullList();
 
-    console.log(dishesList);
     //selecting proper table body to work on. The full list table
     let fullTableBody = document.querySelector('#fullTableBody');
     // for loop to iterate thru the full list array
     for (let i = 0; i < dishesList.length; i++) {
         fullTableBody.innerHTML += `<tr scope="row"><td>${dishesList[i].dishName}</td><td>${dishesList[i].ingredients}</td><td><button class="btn btn-outline-danger btn-sm" id="remove-btn">Remove</button></td></tr>`
     }
-
-    console.log('Full list showing')
-
     // Array of all remove buttons on full list
 
     let allRemoveBtns = document.querySelectorAll("#remove-btn");
@@ -171,7 +170,6 @@ function removeBtns(allRemoveBtns){
          //To get the actual Index number from the i variable make sure you actually declare it in the for loop parenthesis, for some reason if you do not express the let, it will give you the as I the next number of you Array length, example if it is 5 length i will be 6. 
     
         allRemoveBtns[i].addEventListener('click', function (){
-            console.log(i);
             if ( dishesList.length > 5){
                 if (i > -1){
                     // save to db
@@ -181,7 +179,6 @@ function removeBtns(allRemoveBtns){
                     fullList()
                 }
             } else {
-                console.log('You need more than 5 items to create a List!')
     
                 let accordionBody = document.querySelector('.accordion-body')
                 let childNode = document.querySelector('#accordion-child')
@@ -216,7 +213,6 @@ function addingToList(e){
         //creating new Ob with new values
 
         let lastItemIndex = dishesList.length;
-        console.log(lastItemIndex)
 
     
         let newDish = {
@@ -248,7 +244,7 @@ function addingToList(e){
 
 function loginError(err){
 
-    let modalBody = document.querySelector('#modal-body')
+    let modalContent = document.querySelector('#modal-content')
     let errorDiv = document.querySelector('#error-div');
     let errorP = document.createElement('p');
     errorP.setAttribute('class', 'text-danger text-center mb-3')
@@ -256,28 +252,28 @@ function loginError(err){
     switch(err.code){
         case 'auth/wrong-password':
             errorP.textContent = "You've entered a wrong password"
-            modalBody.insertBefore(errorP, errorDiv);
+            modalContent.insertBefore(errorP, errorDiv);
             setTimeout(() =>{
                 errorP.remove();
             },5000)
             break;
         case 'auth/user-not-found':
             errorP.textContent = "You are not Registered"
-            modalBody.insertBefore(errorP, errorDiv);
+            modalContent.insertBefore(errorP, errorDiv);
             setTimeout(() =>{
                 errorP.remove();
             },5000)
             break;
         case 'auth/invalid-email':
             errorP.textContent = "Please Enter Valid Email"
-            modalBody.insertBefore(errorP, errorDiv);
+            modalContent.insertBefore(errorP, errorDiv);
             setTimeout(() =>{
                 errorP.remove();
             },5000)
             break;
         case ' ':
             errorP.textContent = "Unknown Error"
-            modalBody.insertBefore(errorP, errorDiv);
+            modalContent.insertBefore(errorP, errorDiv);
             setTimeout(() =>{
                 errorP.remove();
             },5000)

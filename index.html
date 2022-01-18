@@ -18,7 +18,7 @@
                 <div class="col-sm-5"></div>
                 <div class="col-sm-5"></div>
                 <div class="col-sm-2" id="login-div">
-                    <button type="button " id="login-modal-btn" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#login-modal">Log In</button>
+                    <button type="button " id="login-modal-btn" class="btn btn-outline-primary">Log In</button>
                 </div>
             </div>
         </div>
@@ -39,28 +39,24 @@
     </div>
 </main>
 
-<!-- Login MODAL -->
-<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Log In</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- Login MODAL-->
+<div id="modal-container" class="d-none">
+    <div id="modal-content" class="container w-25 mt-5 pt-3 bg-secondary">
+        <h4>Please enter Email & Password</h4>
+        <div class="form-floating mb-3" id="error-div">
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" placeholder="Password" required>
+            <label for="floatingPassword">Password</label>
+            <input type="submit" id="login" class="btn btn-outline-primary mt-3 mb-3">
         </div>
-        <div class="modal-body" id="modal-body">
-            <div class="form-floating mb-3" id="error-div">
-                <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
-                <label for="floatingInput">Email address</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="password" placeholder="Password" required>
-                <label for="floatingPassword">Password</label>
-                <input type="submit" id="login" class="btn btn-outline-primary mt-3">
-            </div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
+
+
 
   <!-- Full List Accordion -->
 <div class="accordion accordion-flush container py-5" id="accordionFlushExample">
