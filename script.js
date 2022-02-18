@@ -1,44 +1,20 @@
 
 
-// initializing DB
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
-import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js";
-import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-auth.js"
-import{ API_KEY, AUTH_DOMAIN, DB_URL, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID } from "/config.js"
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
-  databaseURL: DB_URL,
-  projectId: PROJECT_ID,
-  storageBucket: STORAGE_BUCKET,
-  messagingSenderId: MESSAGING_SENDER_ID,
-  appId: APP_ID
-};
-
-// Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-const db = getDatabase(firebaseApp);
-const dbref = ref(db);
-const auth = getAuth(firebaseApp);
-
 // getting Data from DB
 let dishesList = null;
 
-function getData(){
-    
-    get(child(dbref, "dishesList/")).then((snapshot) =>{
-        if(snapshot.exists()){
-            dishesList = snapshot.val();
-        }else{
-            console.log("no data Found");
+async function getData(){
+    try {
+        const response = await fetch('http://localhost:3000/dishes-db/get-db')
+        if (response !== null){
+            let parsedRes = await response.json()
+
+            dishesList = Object.values(parsedRes)
+
         }
-    }).catch((err) => {
-        console.error(err);
-    })
+    } catch (error) {
+        
+    }
 }
 
 getData()
@@ -59,16 +35,32 @@ const loginEmailPassword = async (e) => {
     inputEmail.value = '';
     inputPassword.value = '';
 
+    let logInBody ={
+        email: loginEmail,
+        password: loginPassword
+    }
+
     try{
-        const userCredentials = await signInWithEmailAndPassword(auth, loginEmail,loginPassword);
-        if (userCredentials !== null){
+        const userCredentials = await fetch('http://localhost:3000/dishes-db/auth',{
+            method: 'POST',
+            headers:{
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(logInBody)
+
+        });
+
+        if (userCredentials.ok){
             fullList();
             loggedInUI()
+         } else{
+            let parsedErrorCode = await userCredentials.json()
+            loginError(parsedErrorCode)
         }
         
     }
     catch(err) {
-        loginError(err)
+        console.log(err)
     }
     
 
@@ -163,17 +155,32 @@ function fullList () {
 
 
 // for loop to iterate thru buttons
-function removeBtns(allRemoveBtns){
+async function removeBtns(allRemoveBtns){
 
 
     for( let i = 0; i < allRemoveBtns.length; i++){
          //To get the actual Index number from the i variable make sure you actually declare it in the for loop parenthesis, for some reason if you do not express the let, it will give you the as I the next number of you Array length, example if it is 5 length i will be 6. 
     
-        allRemoveBtns[i].addEventListener('click', function (){
+        allRemoveBtns[i].addEventListener('click', async function (){
             if ( dishesList.length > 5){
                 if (i > -1){
                     // save to db
-                     remove(child(dbref,`dishesList/${i}/`));
+                    let indexObject = {
+                        index: i
+                    }
+                   try {
+                    const response = await fetch('http://localhost:3000/dishes-db',{
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                        },
+                        body: JSON.stringify(indexObject)
+
+                    })
+                   } catch (err) {
+                       console.error(err)
+                   }
+                    //  remove(child(dbref,`dishesList/${i}/`));
                     dishesList.splice(i, 1)
                     
                     fullList()
