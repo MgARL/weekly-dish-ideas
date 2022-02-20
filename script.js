@@ -26,19 +26,10 @@ const inputPassword = document.querySelector('#password');
 const btnLogout = document.createElement('button');
 const btnLoginModal = document.querySelector('#login-modal-btn');
 const loginModalCon = document.querySelector('#modal-container');
+const btnCloseLoginModal = document.querySelector('#close-x')
 
 const loginEmailPassword = async (e) => {
     e.preventDefault()
-    const loginEmail = inputEmail.value;
-    const loginPassword = inputPassword.value;
-
-    inputEmail.value = '';
-    inputPassword.value = '';
-
-    let logInBody ={
-        email: loginEmail,
-        password: loginPassword
-    }
 
     try{
         const userCredentials = await fetch('http://localhost:3000/dishes-db/auth',{
@@ -46,9 +37,15 @@ const loginEmailPassword = async (e) => {
             headers:{
                 'content-type': 'application/json',
             },
-            body: JSON.stringify(logInBody)
+            body: JSON.stringify({
+                email: inputEmail.value,
+                password: inputPassword.value
+            })
 
         });
+
+        inputEmail.value = '';
+        inputPassword.value = '';
 
         if (userCredentials.ok){
             fullList();
@@ -66,9 +63,10 @@ const loginEmailPassword = async (e) => {
 
 
 } 
-btnLoginModal.addEventListener('click', showLoginModal)
+btnLoginModal.addEventListener('click', showLoginModal);
 btnLogin.addEventListener('click', loginEmailPassword);
 btnLogout.addEventListener('click', loggingOut);
+btnCloseLoginModal.addEventListener('click', () =>  loginModalCon.classList.add('d-none'));
 
 // Array of the days of the week
 
@@ -84,7 +82,7 @@ document.querySelector('#createList').addEventListener('click', (e) => {
     // Selecting the table body for later use when updating the dom
     let table = document.querySelector('#table');
     // if there is something already in table-body lets clear it
-    table.innerHTML = '<thead class="text-center"><tr><th scope="col-sm-4">Day of the week</th><th scope="col-sm-4">Dish Name</th><th scope="col-sm-4">Ingredients</th></tr></thead>';
+    table.innerHTML = '<thead class="text-center"><tr><th scope="col-sm-4">Day of the week</th><th scope="col-sm-4">Meal Name</th><th scope="col-sm-4">Ingredients</th></tr></thead>';
     let tableBody = document.createElement('tbody');
 
     //for loop to iterate thru this new 5 dishes Array
@@ -131,7 +129,13 @@ function loggedInUI(){
 
 // logging Out Function
 async function loggingOut(){
-    await signOut(auth)
+    try {
+        let response = await fetch('http://localhost:3000/dishes-db/auth')
+        console.log(response)
+    } catch (error) {
+        
+    }
+    
     location.reload();
    
 }

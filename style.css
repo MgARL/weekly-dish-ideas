@@ -11,3 +11,9 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.829);
 }
+#close-x{
+    color: rgba(255, 0, 0, 0.5);
+}
+#close-x:hover{
+    color: red;
+}
