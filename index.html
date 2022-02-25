@@ -97,12 +97,12 @@
             <form>
                 <div class="row py-3">
                     <div class="col-lg-5 d-flex justify-content-center">
-                        <span class="input-group-text">Add New Meal:</span>
-                        <input class="form-control" type="text" placeholder="add new meal here" id="addDish">
+                        <label for="addDish" class="input-group-text">Add New Meal:</label>
+                        <input class="form-control" type="text" minlength="3" placeholder="add new meal here" id="addDish"  required>
                     </div>
                     <div class="col-lg-5 d-flex justify-content-center">
-                        <span class="input-group-text">Ingredients:</span>
-                        <input class="form-control" type="text" placeholder="use commas" id="addIngredients"> 
+                        <label for="AddIngredients" class="input-group-text">Ingredients:</label>
+                        <input class="form-control" type="text" minlength="3" placeholder="use commas" id="addIngredients" required>
                     </div>
                     <div class="col-lg-2">
                         <button class="btn btn-outline-info" type="submit" id="addingToList">submit</button>

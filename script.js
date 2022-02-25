@@ -5,7 +5,7 @@ let dishesList = null;
 
 async function getData(){
     try {
-        const response = await fetch('http://localhost:3000/dishes-db/get-db')
+        const response = await fetch('https://proxy-server-db.herokuapp.com/dishes-db/get-db')
         if (response !== null){
             let parsedRes = await response.json()
 
@@ -130,7 +130,7 @@ function loggedInUI(){
 // logging Out Function
 async function loggingOut(){
     try {
-        let response = await fetch('http://localhost:3000/dishes-db/auth')
+        let response = await fetch('https://proxy-server-db.herokuapp.com/dishes-db/auth')
         console.log(response)
     } catch (error) {
         
@@ -146,6 +146,7 @@ function fullList () {
 
     //selecting proper table body to work on. The full list table
     let fullTableBody = document.querySelector('#fullTableBody');
+    fullTableBody.innerHTML = ''
     // for loop to iterate thru the full list array
     for (let i = 0; i < dishesList.length; i++) {
         fullTableBody.innerHTML += `<tr scope="row"><td>${dishesList[i].dishName}</td><td>${dishesList[i].ingredients}</td><td><button class="btn btn-outline-danger btn-sm" id="remove-btn">Remove</button></td></tr>`
@@ -173,7 +174,7 @@ async function removeBtns(allRemoveBtns){
                         index: i
                     }
                    try {
-                    const response = await fetch('http://localhost:3000/dishes-db',{
+                    const response = await fetch('http://localhost:3000/dishes-db/delete-db',{
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -212,7 +213,7 @@ async function removeBtns(allRemoveBtns){
 // Creating the event that will call the adding to list function when  submit button  is clicked
 
 
-function addingToList(e){
+async function addingToList(e){
     e.preventDefault();
     // Creating 2 vars to hold the 2 text areas values
     let addDish = document.querySelector('#addDish').value;
@@ -228,7 +229,8 @@ function addingToList(e){
     
         let newDish = {
             dishName: addDish,
-            ingredients: addIngredients
+            ingredients: addIngredients,
+            newIndex: lastItemIndex
         }
     
         //adding newDish Ob to Array DishesList
@@ -239,10 +241,13 @@ function addingToList(e){
         fullList();
     
         // saving to db
-        update(ref(db, `dishesList/${lastItemIndex}`),{
-            dishName: addDish,
-            ingredients: addIngredients
-        });
+        const response = await fetch('http://localhost:3000/dishes-db/add-new', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(newDish)
+        })
 
     }
 }
