@@ -32,7 +32,7 @@ const loginEmailPassword = async (e) => {
     e.preventDefault()
 
     try{
-        const userCredentials = await fetch('http://localhost:3000/dishes-db/auth',{
+        const userCredentials = await fetch('https://proxy-server-db.herokuapp.com/dishes-db/auth',{
             method: 'POST',
             headers:{
                 'content-type': 'application/json',
@@ -174,7 +174,7 @@ async function removeBtns(allRemoveBtns){
                         index: i
                     }
                    try {
-                    const response = await fetch('http://localhost:3000/dishes-db/delete-db',{
+                    const response = await fetch('https://proxy-server-db.herokuapp.com/dishes-db/delete-db',{
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -241,7 +241,7 @@ async function addingToList(e){
         fullList();
     
         // saving to db
-        const response = await fetch('http://localhost:3000/dishes-db/add-new', {
+        const response = await fetch('https://proxy-server-db.herokuapp.com/dishes-db/add-new', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
