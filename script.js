@@ -5,7 +5,7 @@ let dishesList = null;
 
 async function getData(){
     try {
-        const response = await fetch('https://proxy-server-db.herokuapp.com/dishes-db/get-db')
+        const response = await fetch('https://proxy-server-prod.up.railway.app/dishes-db/get-db')
         if (response !== null){
             let parsedRes = await response.json()
 
@@ -32,7 +32,7 @@ const loginEmailPassword = async (e) => {
     e.preventDefault()
 
     try{
-        const userCredentials = await fetch('https://proxy-server-db.herokuapp.com/dishes-db/auth',{
+        const userCredentials = await fetch('https://proxy-server-prod.up.railway.app/dishes-db/auth',{
             method: 'POST',
             headers:{
                 'content-type': 'application/json',
@@ -130,7 +130,7 @@ function loggedInUI(){
 // logging Out Function
 async function loggingOut(){
     try {
-        let response = await fetch('https://proxy-server-db.herokuapp.com/dishes-db/auth')
+        let response = await fetch('https://proxy-server-prod.up.railway.app/dishes-db/auth')
         console.log(response)
     } catch (error) {
         
@@ -174,7 +174,7 @@ async function removeBtns(allRemoveBtns){
                         index: i
                     }
                    try {
-                    const response = await fetch('https://proxy-server-db.herokuapp.com/dishes-db/delete-db',{
+                    const response = await fetch('https://proxy-server-prod.up.railway.app/dishes-db/delete-db',{
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -241,7 +241,7 @@ async function addingToList(e){
         fullList();
     
         // saving to db
-        const response = await fetch('https://proxy-server-db.herokuapp.com/dishes-db/add-new', {
+        const response = await fetch('https://proxy-server-prod.up.railway.app/dishes-db/add-new', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
